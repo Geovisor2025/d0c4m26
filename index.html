@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repositorio Documental</title>
+
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #eef2f7;
+    margin: 0;
+  }
+
+  header {
+    background: linear-gradient(135deg, #4CAF50, #2e7d32);
+    color: white;
+    padding: 25px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+
+  .container {
+    max-width: 950px;
+    margin: 30px auto;
+    padding: 0 15px;
+  }
+
+  /* MESES */
+  .months {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+  }
+
+  .month {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    transition: all 0.25s ease;
+    font-weight: 600;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  }
+
+  .month:hover {
+    background: #4CAF50;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  }
+
+  /* ARCHIVOS */
+  .file {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+
+  .file:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+  }
+
+  .file-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
+
+  .name {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .type {
+    font-size: 12px;
+    color: #777;
+  }
+
+  .btn {
+    background: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s;
+  }
+
+  .btn:hover {
+    background: #2e7d32;
+  }
+
+  .hidden { display: none; }
+
+  .back {
+    margin-bottom: 20px;
+    cursor: pointer;
+    color: #2e7d32;
+    font-weight: 600;
+  }
+
+  .back:hover {
+    text-decoration: underline;
+  }
+
+</style>
+</head>
+
+<body>
+
+<header>
+---------------
+</header>
+
+<div class="container">
+
+  <!-- MESES -->
+  <div id="view-months">
+    <div class="months">
+      <div class="month" onclick="showMonth('enero')">📅 Enero</div>
+      <div class="month" onclick="showMonth('febrero')">📅 Febrero</div>
+      <div class="month" onclick="showMonth('marzo')">📅 Marzo</div>
+      <div class="month" onclick="showMonth('abril')">📅 Abril</div>
+    </div>
+  </div>
+
+  <!-- ARCHIVOS -->
+  <div id="view-files" class="hidden">
+
+    <div class="back" onclick="goBack()">⬅ Volver a meses</div>
+
+    <!-- ENERO -->
+    <div class="month-files hidden" id="enero">
+
+      <div class="file">
+        <div class="file-info">
+          <div class="icon">📄</div>
+          <div>
+            <div class="name">Mapa Cartográfico Beni</div>
+            <div class="type">PDF</div>
+          </div>
+        </div>
+        <a href="docs/beni.pdf" class="btn" download>Descargar</a>
+      </div>
+
+      <div class="file">
+        <div class="file-info">
+          <div class="icon">📘</div>
+          <div>
+            <div class="name">Informe Técnico</div>
+            <div class="type">Word</div>
+          </div>
+        </div>
+        <a href="docs/respuesta_acampo.docx" class="btn" download>Descargar</a>
+      </div>
+
+    </div>
+
+    <!-- FEBRERO -->
+    <div class="month-files hidden" id="febrero">
+
+      <div class="file">
+        <div class="file-info">
+          <div class="icon">📄</div>
+          <div>
+            <div class="name">Mapa Cartográfico Cochabamba</div>
+            <div class="type">PDF</div>
+          </div>
+        </div>
+        <a href="docs/Mapa_Cartográfico_Cochabamba.pdf" class="btn" download>Descargar</a>
+      </div>
+
+    </div>
+
+    <!-- MARZO -->
+    <div class="month-files hidden" id="marzo">
+
+      <div class="file">
+        <div class="file-info">
+          <div class="icon">📊</div>
+          <div>
+            <div class="name">Base de Datos</div>
+            <div class="type">Excel</div>
+          </div>
+        </div>
+        <a href="docs/datos.xlsx" class="btn" download>Descargar</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function showMonth(month) {
+  document.getElementById('view-months').classList.add('hidden');
+  document.getElementById('view-files').classList.remove('hidden');
+
+  document.querySelectorAll('.month-files').forEach(el => el.classList.add('hidden'));
+  document.getElementById(month).classList.remove('hidden');
+}
+
+function goBack() {
+  document.getElementById('view-months').classList.remove('hidden');
+  document.getElementById('view-files').classList.add('hidden');
+}
+</script>
+
+</body>
+</html>
